@@ -23,7 +23,6 @@ public class Produto implements Serializable{
 	@Size(min = 2, max = 100)
 	private String nome;
 	
-	
 	private Double valor;
 	
 	public Integer getId() {

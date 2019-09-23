@@ -9,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -29,18 +28,15 @@ public class Pedido implements Serializable{
 	@NotEmpty
 	private LocalDate data;
 	
-	@ManyToOne
+	@OneToOne	
 	@JoinColumn(name = "pagamento_id_fk")
 	private Pagamento pagamento;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "cliente_id_fk")
 	private Cliente cliente;
 	
-	@ManyToMany
-	@JoinTable(name = "produto",
-	joinColumns = { @JoinColumn(name = "id_produto") },
-	inverseJoinColumns = {@JoinColumn(name = "id_produtos") })
+	@OneToMany
 	private List <Produto> produtos;
 	
 	public Integer getId() {

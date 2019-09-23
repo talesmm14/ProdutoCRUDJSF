@@ -1,56 +1,75 @@
 package br.unitins.JSF;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.unitins.EJB.PedidoEJB;
 import br.unitins.model.Pedido;
+import br.unitins.model.Produto;
 
 @Named
 @SessionScoped
-public class PedidoBean implements Serializable{
+public class PedidoBean implements Serializable {
 	@EJB
-	private PedidoEJB PedidoEJB;
-	
-	private Pedido Pedido;
-	
+	private PedidoEJB pedidoEJB;
+
+	private Pedido pedido;
+
 	private List<Pedido> pedidos;
-	
+
+	private List<Produto> produtos;
+
+	@PostConstruct
+	public void init() {
+		pedidos = pedidoEJB.findAll();
+	}
+
 	public String inserir() {
-		PedidoEJB.insert(Pedido);
+		pedidoEJB.insert(pedido);
 		return null;
 	}
-	
+
 	public String alterar() {
-		PedidoEJB.update(Pedido);
+		pedidoEJB.update(pedido);
 		return null;
 	}
-	
+
 	public String apagar() {
-		PedidoEJB.delete(Pedido);
+		pedidoEJB.delete(pedido);
 		return null;
 	}
-	
+
 	public String novo() {
-		Pedido = new Pedido();
+		pedido = new Pedido();
 		return null;
 	}
-	
+
+	public String cadastrarProdutos(Produto produto) {
+
+		return null;
+	}
+
 	public Pedido getPedido() {
-		if (Pedido == null)
-			Pedido = new Pedido();
-		return Pedido;
+		if (pedido == null)
+			pedido = new Pedido();
+		return pedido;
 	}
 
 	public List<Pedido> getPedidos() {
+		if (pedidos == null)
+			pedidos = new ArrayList<>();
 		return pedidos;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public List<Produto> getProdutos() {
+		if (produtos == null)
+			produtos = new ArrayList<>();
+		return produtos;
 	}
 }

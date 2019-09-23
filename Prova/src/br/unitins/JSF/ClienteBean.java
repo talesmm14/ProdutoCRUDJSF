@@ -1,7 +1,10 @@
 package br.unitins.JSF;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -16,6 +19,13 @@ public class ClienteBean implements Serializable{
 	private ClienteEJB clienteEJB;
 	
 	private Cliente cliente;
+	
+	private List<Cliente> clientes;
+	
+	@PostConstruct 
+	public void init() {
+		clientes = clienteEJB.findAll();
+	}
 	
 	public String inserir() {
 		clienteEJB.insert(cliente);
@@ -41,5 +51,11 @@ public class ClienteBean implements Serializable{
 		if (cliente == null)
 			cliente = new Cliente();
 		return cliente;
+	}
+
+	public List<Cliente> getClientes() {
+		if (clientes == null)
+			clientes = new ArrayList<>();
+		return clientes;
 	}
 }

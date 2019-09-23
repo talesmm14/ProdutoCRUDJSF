@@ -1,7 +1,10 @@
 package br.unitins.JSF;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -13,33 +16,46 @@ import br.unitins.model.TipoPagamento;
 @SessionScoped
 public class TipoPagamentoBean implements Serializable{
 	@EJB
-	private TipoPagamentoEJB TipoPagamentoEJB;
+	private TipoPagamentoEJB tipoPagamentoEJB;
 	
-	private TipoPagamento TipoPagamento;
+	private TipoPagamento tipoPagamento;
+	
+	private List<TipoPagamento> tipoPagamentos;
+	
+	@PostConstruct 
+	public void init() {
+		tipoPagamentos = tipoPagamentoEJB.findAll();
+	}
 	
 	public String inserir() {
-		TipoPagamentoEJB.insert(TipoPagamento);
+		tipoPagamentoEJB.insert(tipoPagamento);
 		return null;
 	}
 	
 	public String alterar() {
-		TipoPagamentoEJB.update(TipoPagamento);
+		tipoPagamentoEJB.update(tipoPagamento);
 		return null;
 	}
 	
 	public String apagar() {
-		TipoPagamentoEJB.delete(TipoPagamento);
+		tipoPagamentoEJB.delete(tipoPagamento);
 		return null;
 	}
 	
 	public String novo() {
-		TipoPagamento = new TipoPagamento();
+		tipoPagamento = new TipoPagamento();
 		return null;
 	}
 	
 	public TipoPagamento getTipoPagamento() {
-		if (TipoPagamento == null)
-			TipoPagamento = new TipoPagamento();
-		return TipoPagamento;
+		if (tipoPagamento == null)
+			tipoPagamento = new TipoPagamento();
+		return tipoPagamento;
+	}
+
+	public List<TipoPagamento> getTipoPagamentos() {
+		if (tipoPagamentos == null)
+			tipoPagamentos = new ArrayList<>();
+		return tipoPagamentos;
 	}
 }
