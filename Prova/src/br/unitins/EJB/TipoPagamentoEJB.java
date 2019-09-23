@@ -1,5 +1,7 @@
 package br.unitins.EJB;
 
+import java.util.List;
+
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +29,9 @@ public class TipoPagamentoEJB {
 
 	public TipoPagamento load(Integer id) {
 		return em.find(TipoPagamento.class, id);
+	}
+	
+	public List<TipoPagamento> findAll() {
+		return em.createQuery("select t from TipoPagamento t", TipoPagamento.class).getResultList();
 	}
 }

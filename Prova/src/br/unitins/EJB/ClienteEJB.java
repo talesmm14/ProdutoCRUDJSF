@@ -1,5 +1,7 @@
 package br.unitins.EJB;
 
+import java.util.List;
+
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,16 +22,15 @@ public class ClienteEJB {
 	}
 
 	public void delete(Cliente cliente) {
-
-		System.out.println("Objeto: " + cliente.getId());
-		
+		System.out.println("Objeto: " + cliente.getId());		
 		cliente = load(cliente.getId());
 		em.remove(cliente);
 	}
 
 	public Cliente load(Integer id) {
-
 		return em.find(Cliente.class, id);
-
+	}
+	public List<Cliente> findAll() {
+		return em.createQuery("select c from Cliente c", Cliente.class).getResultList();
 	}
 }

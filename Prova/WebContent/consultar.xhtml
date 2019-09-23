@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Consultas</title>
+</h:head>
+<h:body>
+	<p:layout style="min-width:500px;min-height:800px;">
+		<p:layoutUnit position="west" resizable="true" size="300" minSize="40"
+			maxSize="200">
+			<p:button value="Cadastro" href="cadastro.xhtml" />
+			<p:button value="Banco" href="consultar.xhtml" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h:form>
+				<h3>Pedidos</h3>
+				<p:accordionPanel value="#{pedidoBean.pedidos}" var="pedido">
+					<p:tab title="Pedido - #{pedido.id}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Data:" style="font-weight: bold" />
+							<h:outputText value="#{pedido.data}" />
+
+							<h:outputText value="Pagamento:" style="font-weight: bold" />
+							<h:outputText value="#{pedido.pagamento.tipoPagamento.descricao}" />
+
+							<h:outputText value="Cliente:" style="font-weight: bold" />
+							<h:outputText value="#{pedido.cliente.nome}" />
+
+							<!--  <h:outputText value="Produto:" style="font-weight: bold" />
+							<p:dataTable var="pro" value="#{pedido.produtos}">
+								<p:column headerText="Nome: ">
+									<h:outputText value="#{pro.nome}" />
+								</p:column>
+							</p:dataTable>
+							-->
+							<h:outputText value="Valor total:" style="font-weight: bold" />
+							<h:outputText value="#{pedido.valorTotal}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+			<h:form>
+				<h3>Clientes</h3>
+				<p:accordionPanel value="#{clienteBean.clientes}" var="cliente">
+					<p:tab title="Cliente - #{cliente.nome}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="ID:" style="font-weight: bold" />
+							<h:outputText value="#{cliente.id}" />
+
+							<h:outputText value="Valor:" style="font-weight: bold" />
+							<h:outputText value="#{cliente.email}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+			<h:form>
+				<h3>Produtos</h3>
+				<p:accordionPanel value="#{produtoBean.produtos}" var="produto">
+					<p:tab title="Produto - #{produto.nome}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="ID:" style="font-weight: bold" />
+							<h:outputText value="#{produto.id}" />
+
+							<h:outputText value="Valor:" style="font-weight: bold" />
+							<h:outputText value="#{produto.valor}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+			<h:form>
+				<h3>Forma de pagamentos</h3>
+				<p:accordionPanel value="#{tipoPagamentoBean.tipoPagamentos}"
+					var="pag">
+					<p:tab title="Forma - #{pag.descricao}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="ID:" style="font-weight: bold" />
+							<h:outputText value="#{pag.id}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
