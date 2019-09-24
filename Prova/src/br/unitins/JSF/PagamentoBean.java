@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.unitins.EJB.PagamentoEJB;
+import br.unitins.EJB.PedidoEJB;
 import br.unitins.model.Pagamento;
 
 @Named
@@ -16,6 +17,9 @@ import br.unitins.model.Pagamento;
 public class PagamentoBean implements Serializable {
 	@EJB
 	private PagamentoEJB pagamentoEJB;
+	
+	@EJB
+	private PedidoEJB pedidoEJB;
 
 	private Pagamento pagamento;
 
@@ -28,6 +32,7 @@ public class PagamentoBean implements Serializable {
 
 	public String inserir() {
 		pagamentoEJB.insert(pagamento);
+		
 		return null;
 	}
 

@@ -57,7 +57,7 @@
 			maxSize="200">
 			<h:form>
 				<p:growl id="messages" showDetail="true" />
-
+				<p:commandButton value="Home" action="index?faces-redirect=true"/>
 				<p:menuButton value="Cadastro">
 					<p:menuitem value="Pedidos" action="cadastroPedido?faces-redirect=true" update="messages"
 						icon="pi pi-save" />
@@ -106,6 +106,40 @@
 							action="#{tipoPagamentoBean.apagar}" update="form4" />
 						<p:commandButton value="Novo" action="#{tipoPagamentoBean.novo}"
 							update="form4" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+			<h:form id="form">
+				<p:panel id="cad_pagamento" header="Cadastrar Pagamento"
+					toggleable="true" toggleSpeed="500" closeSpeed="500"
+					widgetVar="cad_pagamento">
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputText value="Tipo Pagamento: " />
+						<p:selectOneMenu id="pedido_formapagamendo"
+							value="#{pagamentoBean.pagamento.id}" style="width:125px">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{tipoPagamentoBean.tipoPagamentos}"
+								var="forma" itemLabel="#{forma.descricao}"
+								itemValue="#{forma.id}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Pedido: " />
+						<p:selectOneMenu id="pedido"
+							value="#{id}" style="width:125px">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{pedidoBean.pedidos}"
+								var="forma" itemLabel="#{forma.id}"
+								itemValue="#{forma.id}" />
+						</p:selectOneMenu>
+						
+						<p:commandButton value="Cadastrar"
+							action="#{pagamentoBean.inserir()}" update="form" />
+						<p:commandButton value="Alterar"
+							action="#{pagamentoBean.alterar}" update="form" />
+						<p:commandButton value="Apagar"
+							action="#{pagamentoBean.apagar}" update="form" />
+						<p:commandButton value="Novo" action="#{pagamentoBean.novo}"
+							update="form" />
 					</h:panelGrid>
 				</p:panel>
 			</h:form>

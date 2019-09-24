@@ -58,15 +58,15 @@
 			maxSize="200">
 			<h:form>
 				<p:growl id="messages" showDetail="true" />
-
+				<p:commandButton value="Home" action="index?faces-redirect=true"/>
 				<p:menuButton value="Cadastro">
-					<p:menuitem value="Pedidos" action="cadastroPedido.xhtml" update="messages"
+					<p:menuitem value="Pedidos" action="cadastroPedido?faces-redirect=true" update="messages"
 						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cadastroCliente.xhtml" update="messages"
+					<p:menuitem value="Cliente" action="cadastroCliente?faces-redirect=true" update="messages"
 						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="cadastroProduto.xhtml" ajax="false"
+					<p:menuitem value="Produtos" action="cadastroProduto?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="cadastroPagamento.xhtml" ajax="false"
+					<p:menuitem value="Formas de pagamento" action="cadastroPagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
 					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
@@ -74,13 +74,13 @@
 				</p:menuButton>
 				<br/><br/>
 				<p:menuButton value="Consultas">
-					<p:menuitem value="Pedidos" action="pedido.xhtml" update="messages"
+					<p:menuitem value="Pedidos" action="pedido?faces-redirect=true" update="messages"
 						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cliente.xhtml" update="messages"
+					<p:menuitem value="Cliente" action="cliente?faces-redirect=true" update="messages"
 						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="produto.xhtml" ajax="false"
+					<p:menuitem value="Produtos" action="produto?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="pagamento.xhtml" ajax="false"
+					<p:menuitem value="Formas de pagamento" action="pagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
 					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
@@ -106,7 +106,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel for="advanced" value="Produtos: " />
-						<p:selectManyMenu id="advanced" value="#{id }" filter="true"
+						<p:selectManyMenu id="advanced" value="#{id}" filter="true"
 							filterMatchMode="contains" showCheckbox="true">
 							<f:selectItems value="#{produtoBean.produtos}" var="produ"
 								itemLabel="#{produ.nome}"
@@ -117,18 +117,20 @@
 						</p:selectManyMenu>
 
 						<p:outputLabel for="pedido_formapagamendo"
-							value="Forma de pagamento: " />
+							value="Pagamento: " />
 						<p:selectOneMenu id="pedido_formapagamendo"
-							value="#{tipoPagamentoBean.tipoPagamento.id}" style="width:125px">
+							value="#{pagamentoBean.pagamento.id}" style="width:125px">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
-							<f:selectItems value="#{tipoPagamentoBean.tipoPagamentos}"
-								var="forma" itemLabel="#{forma.descricao}"
+							<f:selectItems value="#{pagamentoBean.pagamento}"
+								var="forma" itemLabel="#{forma.tipoPagamento.descricao}"
 								itemValue="#{forma.id}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel for="mask" value="Data:" />
 						<p:calendar id="mask" value="#{pedidoBean.pedido.data}"
-							pattern="dd-MM-yyyy" mask="true" />
+							pattern="yyyy-MM-dd" mask="true" >
+							<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+							</p:calendar>
 
 						<p:commandButton value="Cadastrar"
 							action="#{pedidoBean.inserir()}" update="form3" />
