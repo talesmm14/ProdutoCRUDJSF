@@ -24,6 +24,8 @@ public class PedidoBean implements Serializable {
 	private ProdutoEJB produtoEJB;
 
 	private Pedido pedido;
+	
+	private Integer idProduto;
 
 	private List<Pedido> pedidos;
 
@@ -54,8 +56,8 @@ public class PedidoBean implements Serializable {
 		return null;
 	}
 
-	public String cadastrarProdutos(int id) {
-		produtos.add(produtoEJB.load(id));
+	public String cadastrarProdutos() {
+		produtos.add(produtoEJB.load(idProduto));
 		pedido.setProdutos(produtos);
 		return null;
 	}
@@ -78,5 +80,13 @@ public class PedidoBean implements Serializable {
 			produtos = new ArrayList<>();
 		produtos = produtoEJB.findAll();
 		return produtos;
+	}
+
+	public Integer getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
 }

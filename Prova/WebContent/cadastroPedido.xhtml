@@ -106,15 +106,15 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel for="advanced" value="Produtos: " />
-						<p:selectManyMenu id="advanced" value="#{id}" filter="true"
+						<p:selectOneMenu id="advanced" value="#{pedidoBean.idProduto}" filter="true"
 							filterMatchMode="contains" showCheckbox="true">
 							<f:selectItems value="#{produtoBean.produtos}" var="produ"
 								itemLabel="#{produ.nome}"
-								itemValue="#{pedidoBean.pedido.produtos.add(produtoEJB.load(produ.id))}" />
+								itemValue="#{produ.id}" />
 							<p:column>
 								<h:outputText value="#{produ.nome}" />
 							</p:column>
-						</p:selectManyMenu>
+						</p:selectOneMenu>
 
 						<p:outputLabel for="mask" value="Data:" />
 						<p:calendar id="mask" value="#{pedidoBean.pedido.data}"
