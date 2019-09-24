@@ -1,6 +1,7 @@
 package br.unitins.JSF;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 import br.unitins.EJB.PagamentoEJB;
 import br.unitins.EJB.PedidoEJB;
 import br.unitins.model.Pagamento;
+import br.unitins.model.Pedido;
 
 @Named
 @SessionScoped
@@ -20,8 +22,12 @@ public class PagamentoBean implements Serializable {
 	
 	@EJB
 	private PedidoEJB pedidoEJB;
+	
+	private Integer idPedido;
 
 	private Pagamento pagamento;
+	
+	private Pedido pedido;
 
 	private List<Pagamento> pagamentos;
 
@@ -32,7 +38,9 @@ public class PagamentoBean implements Serializable {
 
 	public String inserir() {
 		pagamentoEJB.insert(pagamento);
-		
+		pedido = pedidoEJB.load(idPedido);
+		pedido.getPagamento().setId(pagamento.getId());
+		pedidoEJB.update(pedido);
 		return null;
 	}
 
@@ -56,5 +64,23 @@ public class PagamentoBean implements Serializable {
 			pagamento = new Pagamento();
 		pagamentos = pagamentoEJB.findAll();
 		return pagamento;
+	}
+
+	public Integer getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	public List<Pagamento> getPagamentos() {
+		if (pagamentos == null)
+			pagamentos = new ArrayList<>();
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
 	}
 }

@@ -60,6 +60,18 @@
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>
+			<h:form>
+				<h3>Pagamentos</h3>
+				<p:accordionPanel value="#{pagamentoBean.pagamentos}"
+					var="pag">
+					<p:tab title="Forma - #{pag.tipoPagamento.descricao}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="ID:" style="font-weight: bold" />
+							<h:outputText value="#{pag.id}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
 		</p:layoutUnit>
 	</p:layout>
 </h:body>

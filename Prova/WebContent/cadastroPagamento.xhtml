@@ -125,7 +125,7 @@
 						
 						<h:outputText value="Pedido: " />
 						<p:selectOneMenu id="pedido"
-							value="#{id}" style="width:125px">
+							value="#{pagamentoBean.idPedido}" style="width:125px">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItems value="#{pedidoBean.pedidos}"
 								var="forma" itemLabel="#{forma.id}"

@@ -116,16 +116,6 @@
 							</p:column>
 						</p:selectManyMenu>
 
-						<p:outputLabel for="pedido_formapagamendo"
-							value="Pagamento: " />
-						<p:selectOneMenu id="pedido_formapagamendo"
-							value="#{pagamentoBean.pagamento.id}" style="width:125px">
-							<f:selectItem itemLabel="Selecione" itemValue="" />
-							<f:selectItems value="#{pagamentoBean.pagamento}"
-								var="forma" itemLabel="#{forma.tipoPagamento.descricao}"
-								itemValue="#{forma.id}" />
-						</p:selectOneMenu>
-
 						<p:outputLabel for="mask" value="Data:" />
 						<p:calendar id="mask" value="#{pedidoBean.pedido.data}"
 							pattern="yyyy-MM-dd" mask="true" >
