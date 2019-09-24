@@ -56,6 +56,7 @@ public class TipoPagamentoBean implements Serializable{
 	public List<TipoPagamento> getTipoPagamentos() {
 		if (tipoPagamentos == null)
 			tipoPagamentos = new ArrayList<>();
+		tipoPagamentos = tipoPagamentoEJB.findAll();
 		return tipoPagamentos;
 	}
 }

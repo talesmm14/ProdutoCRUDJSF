@@ -69,12 +69,14 @@ public class PedidoBean implements Serializable {
 	public List<Pedido> getPedidos() {
 		if (pedidos == null)
 			pedidos = new ArrayList<>();
+		pedidos = pedidoEJB.findAll();
 		return pedidos;
 	}
 
 	public List<Produto> getProdutos() {
 		if (produtos == null)
 			produtos = new ArrayList<>();
+		produtos = produtoEJB.findAll();
 		return produtos;
 	}
 }

@@ -49,6 +49,7 @@ public class PagamentoBean implements Serializable {
 	public Pagamento getPagamento() {
 		if (pagamento == null)
 			pagamento = new Pagamento();
+		pagamentos = pagamentoEJB.findAll();
 		return pagamento;
 	}
 }

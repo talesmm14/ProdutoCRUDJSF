@@ -56,6 +56,7 @@ public class ClienteBean implements Serializable{
 	public List<Cliente> getClientes() {
 		if (clientes == null)
 			clientes = new ArrayList<>();
+		clientes = clienteEJB.findAll();
 		return clientes;
 	}
 }
