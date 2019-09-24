@@ -123,6 +123,12 @@
 								itemValue="#{forma.id}" />
 						</p:selectOneMenu>
 						
+						<p:outputLabel for="mask" value="Data:" />
+						<p:calendar id="mask" value="#{pagamentoBean.pagamento.data}"
+							pattern="yyyy-MM-dd" mask="true" >
+							<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+							</p:calendar>
+						
 						<h:outputText value="Pedido: " />
 						<p:selectOneMenu id="pedido"
 							value="#{pagamentoBean.idPedido}" style="width:125px">
