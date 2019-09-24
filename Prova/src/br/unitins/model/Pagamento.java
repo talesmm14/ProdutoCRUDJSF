@@ -1,6 +1,7 @@
 package br.unitins.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class Pagamento implements Serializable{
 	private Integer id;
 	
 	@NotEmpty
-	private LocalDate data;
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name = "tipopagamento_id_fk")
@@ -33,12 +34,14 @@ public class Pagamento implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDate getData() {
+	
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
+	
 	public TipoPagamento getTipoPagamento() {
 		if (tipoPagamento == null)
 			tipoPagamento = new TipoPagamento();

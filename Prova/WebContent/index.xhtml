@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Consultas</title>
+</h:head>
+<h:body>
+	<p:layout style="min-width:500px;min-height:800px;">
+		<p:layoutUnit position="west" resizable="true" size="300" minSize="40"
+			maxSize="200">
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
+
+				<p:menuButton value="Cadastro">
+					<p:menuitem value="Pedidos" action="cadastroPedido.xhtml" update="messages"
+						icon="pi pi-save" />
+					<p:menuitem value="Cliente" action="cadastroCliente.xhtml" update="messages"
+						icon="pi pi-refresh" />
+					<p:menuitem value="Produtos" action="cadastroProduto.xhtml" ajax="false"
+						icon="pi pi-times" />
+					<p:menuitem value="Formas de pagamento" action="cadastroPagamento.xhtml" ajax="false"
+						icon="pi pi-times" />
+					<p:separator />
+					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
+						icon="pi pi-home" />
+				</p:menuButton>
+				<br/><br/>
+				<p:menuButton value="Consultas">
+					<p:menuitem value="Pedidos" action="pedido.xhtml" update="messages"
+						icon="pi pi-save" />
+					<p:menuitem value="Cliente" action="cliente.xhtml" update="messages"
+						icon="pi pi-refresh" />
+					<p:menuitem value="Produtos" action="produto.xhtml" ajax="false"
+						icon="pi pi-times" />
+					<p:menuitem value="Formas de pagamento" action="pagamento.xhtml" ajax="false"
+						icon="pi pi-times" />
+					<p:separator />
+					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
+						icon="pi pi-home" />
+				</p:menuButton>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+		
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

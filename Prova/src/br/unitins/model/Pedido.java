@@ -1,7 +1,7 @@
 package br.unitins.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +25,7 @@ public class Pedido implements Serializable{
 	
 	private Double valorTotal;
 	
-	@NotEmpty
-	private LocalDate data;
+	private Date data;
 	
 	@OneToOne	
 	@JoinColumn(name = "pagamento_id_fk")
@@ -51,12 +50,14 @@ public class Pedido implements Serializable{
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	public LocalDate getData() {
+	
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
+	
 	public Pagamento getPagamento() {
 		return pagamento;
 	}

@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.unitins.EJB.PedidoEJB;
+import br.unitins.EJB.ProdutoEJB;
 import br.unitins.model.Pedido;
 import br.unitins.model.Produto;
 
@@ -18,6 +19,9 @@ import br.unitins.model.Produto;
 public class PedidoBean implements Serializable {
 	@EJB
 	private PedidoEJB pedidoEJB;
+	
+	@EJB
+	private ProdutoEJB produtoEJB;
 
 	private Pedido pedido;
 
@@ -50,8 +54,9 @@ public class PedidoBean implements Serializable {
 		return null;
 	}
 
-	public String cadastrarProdutos(Produto produto) {
-
+	public String cadastrarProdutos(int id) {
+		produtos.add(produtoEJB.load(id));
+		pedido.setProdutos(produtos);
 		return null;
 	}
 
