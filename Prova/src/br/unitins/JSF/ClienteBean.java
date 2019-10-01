@@ -47,7 +47,8 @@ public class ClienteBean implements Serializable{
 	}
 	
 	public String apagar(Cliente cli) {
-		clienteEJB.delete(cli);
+		cliente = cli;
+		clienteEJB.delete(cliente);
 		return null;
 	}
 	
