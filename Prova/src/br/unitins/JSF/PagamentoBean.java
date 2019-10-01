@@ -19,14 +19,14 @@ import br.unitins.model.Pedido;
 public class PagamentoBean implements Serializable {
 	@EJB
 	private PagamentoEJB pagamentoEJB;
-	
+
 	@EJB
 	private PedidoEJB pedidoEJB;
-	
+
 	private Integer idPedido;
 
 	private Pagamento pagamento;
-	
+
 	private Pedido pedido;
 
 	private List<Pagamento> pagamentos;
@@ -37,10 +37,12 @@ public class PagamentoBean implements Serializable {
 	}
 
 	public String inserir() {
-		pagamentoEJB.insert(pagamento);
+		System.out.println("idPedido " + idPedido);
+		pagamentoEJB.insert(pagamento);	
 		pedido = pedidoEJB.load(idPedido);
-		pedido.getPagamento().setId(pagamento.getId());
+		pedido.setPagamento(pagamento);
 		pedidoEJB.update(pedido);
+		novo();
 		return null;
 	}
 
@@ -49,8 +51,8 @@ public class PagamentoBean implements Serializable {
 		return null;
 	}
 
-	public String apagar() {
-		pagamentoEJB.delete(pagamento);
+	public String apagar(Pagamento pag) {
+		pagamentoEJB.delete(pag);
 		return null;
 	}
 

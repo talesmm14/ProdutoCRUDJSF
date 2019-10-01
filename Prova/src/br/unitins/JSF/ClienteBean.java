@@ -21,6 +21,7 @@ public class ClienteBean implements Serializable{
 	private Cliente cliente;
 	
 	private List<Cliente> clientes;
+	private Boolean alterar = false;
 	
 	@PostConstruct 
 	public void init() {
@@ -29,16 +30,24 @@ public class ClienteBean implements Serializable{
 	
 	public String inserir() {
 		clienteEJB.insert(cliente);
+		novo();
 		return null;
 	}
 	
-	public String alterar() {
+	public String alterar(Cliente cli) {
+		cliente = cli;
+		alterar = true;
+		return "cadastroCliente.xhtml?faces-redirect=true";
+	}
+	
+	public String voltar() {
 		clienteEJB.update(cliente);
-		return null;
+		alterar = false;
+		return "cliente.xhtml?faces-redirect=true";
 	}
 	
-	public String apagar() {
-		clienteEJB.delete(cliente);
+	public String apagar(Cliente cli) {
+		clienteEJB.delete(cli);
 		return null;
 	}
 	
@@ -58,5 +67,13 @@ public class ClienteBean implements Serializable{
 			clientes = new ArrayList<>();
 		clientes = clienteEJB.findAll();
 		return clientes;
+	}
+
+	public Boolean getAlterar() {
+		return alterar;
+	}
+
+	public void setAlterar(Boolean alterar) {
+		this.alterar = alterar;
 	}
 }

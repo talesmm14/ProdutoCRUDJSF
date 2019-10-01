@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import br.unitins.EJB.ProdutoEJB;
+import br.unitins.model.Cliente;
 import br.unitins.model.Produto;
 
 @Named
@@ -20,6 +21,7 @@ public class ProdutoBean implements Serializable {
 	private ProdutoEJB produtoEJB;
 
 	private Produto produto;
+	private Boolean alterar = false;
 	
 	private List<Produto> produtos;
 	
@@ -30,17 +32,25 @@ public class ProdutoBean implements Serializable {
 
 	public String inserir() {
 		produtoEJB.insert(produto);
+		novo();
 		return null;
 	}
 	
 	@Transactional
-	public String alterar() {
+	public String alterar(Produto prod) {
+		produto = prod;
+		setAlterar(true);
+		return "cadastroProduto.xhtml?faces-redirect=true";
+	}
+	
+	public String voltar() {
 		produtoEJB.update(produto);
-		return null;
+		setAlterar(false);
+		return "produto.xhtml?faces-redirect=true";
 	}
 
-	public String apagar() {
-		produtoEJB.delete(produto);
+	public String apagar(Produto prod) {
+		produtoEJB.delete(prod);
 		return null;
 	}
 
@@ -68,6 +78,14 @@ public class ProdutoBean implements Serializable {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+	public Boolean getAlterar() {
+		return alterar;
+	}
+
+	public void setAlterar(Boolean alterar) {
+		this.alterar = alterar;
 	}
 	
 	

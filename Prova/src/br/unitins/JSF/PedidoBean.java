@@ -19,14 +19,11 @@ import br.unitins.model.Produto;
 public class PedidoBean implements Serializable {
 	@EJB
 	private PedidoEJB pedidoEJB;
-	
+
 	@EJB
 	private ProdutoEJB produtoEJB;
 
 	private Pedido pedido;
-	
-	private Integer idProduto;
-
 	private List<Pedido> pedidos;
 
 	private List<Produto> produtos;
@@ -37,7 +34,14 @@ public class PedidoBean implements Serializable {
 	}
 
 	public String inserir() {
+		double valor = 0;
+		for (Produto p : produtos) {
+			valor += p.getValor();
+		}
+		pedido.setValorTotal(valor);
+		pedido.setProdutos(produtos);
 		pedidoEJB.insert(pedido);
+		novo();
 		return null;
 	}
 
@@ -53,12 +57,13 @@ public class PedidoBean implements Serializable {
 
 	public String novo() {
 		pedido = new Pedido();
+		produtos = new ArrayList<>();
 		return null;
 	}
 
-	public String cadastrarProdutos() {
-		produtos.add(produtoEJB.load(idProduto));
-		pedido.setProdutos(produtos);
+	public String cadastrarProdutos(Produto prod) {
+		produtos.add(produtoEJB.load(prod.getId()));
+		System.out.println("add : " + produtos);
 		return null;
 	}
 
@@ -78,15 +83,6 @@ public class PedidoBean implements Serializable {
 	public List<Produto> getProdutos() {
 		if (produtos == null)
 			produtos = new ArrayList<>();
-		produtos = produtoEJB.findAll();
 		return produtos;
-	}
-
-	public Integer getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
 	}
 }

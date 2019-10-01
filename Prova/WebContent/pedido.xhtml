@@ -55,19 +55,29 @@
 		<p:layoutUnit position="center">
 			<h:form>
 				<h3>Pedidos</h3>
-				<p:accordionPanel value="#{pedidoBean.pedidos}" var="pedido">
+				<p:accordionPanel value="#{pedidoBean.pedidos}" var="pedido"
+					id="form">
 					<p:tab title="Pedido - #{pedido.id}">
 						<h:panelGrid columns="2" cellpadding="5">
-							<h:outputText value="Data:" style="font-weight: bold" />
+							<h:outputText value="Data do pedido:" style="font-weight: bold" />
 							<h:outputText value="#{pedido.data}" />
 
 							<h:outputText value="Pagamento:" style="font-weight: bold" />
-							<h:outputText value="#{pedido.pagamento.id}" />
+							<h:outputText value="#{pedido.pagamento.tipoPagamento.descricao}" />
+							<h:outputText value="Data do pagamento:" style="font-weight: bold" />
+							<h:outputText value="#{pedido.pagamento.data}" />
 
 							<h:outputText value="Cliente:" style="font-weight: bold" />
 							<h:outputText value="#{pedido.cliente.nome}" />
 
-						
+							<p:dataList value="#{pedido.produtos}" var="produ"
+								type="ordered" emptyMessage="Sem produtos">
+								<f:facet name="header">Lista de produtos</f:facet>
+        						#{produ.nome} - R$#{produ.valor}
+    						</p:dataList>
+							<br />
+							<br />
+
 							<h:outputText value="Valor total:" style="font-weight: bold" />
 							<h:outputText value="#{pedido.valorTotal}" />
 						</h:panelGrid>

@@ -100,10 +100,6 @@
 							value="#{tipoPagamentoBean.tipoPagamento.descricao}" />
 						<p:commandButton value="Cadastrar"
 							action="#{tipoPagamentoBean.inserir()}" update="form4" />
-						<p:commandButton value="Alterar"
-							action="#{tipoPagamentoBean.alterar}" update="form4" />
-						<p:commandButton value="Apagar"
-							action="#{tipoPagamentoBean.apagar}" update="form4" />
 						<p:commandButton value="Novo" action="#{tipoPagamentoBean.novo}"
 							update="form4" />
 					</h:panelGrid>
@@ -116,7 +112,7 @@
 					<h:panelGrid columns="2" cellpadding="10">
 						<h:outputText value="Tipo Pagamento: " />
 						<p:selectOneMenu id="pedido_formapagamendo"
-							value="#{pagamentoBean.pagamento.id}" style="width:125px">
+							value="#{pagamentoBean.pagamento.tipoPagamento.id}" style="width:125px">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItems value="#{tipoPagamentoBean.tipoPagamentos}"
 								var="forma" itemLabel="#{forma.descricao}"
@@ -140,10 +136,6 @@
 						
 						<p:commandButton value="Cadastrar"
 							action="#{pagamentoBean.inserir()}" update="form" />
-						<p:commandButton value="Alterar"
-							action="#{pagamentoBean.alterar}" update="form" />
-						<p:commandButton value="Apagar"
-							action="#{pagamentoBean.apagar}" update="form" />
 						<p:commandButton value="Novo" action="#{pagamentoBean.novo}"
 							update="form" />
 					</h:panelGrid>

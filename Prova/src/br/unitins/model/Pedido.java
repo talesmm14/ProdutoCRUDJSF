@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,19 +25,22 @@ public class Pedido implements Serializable{
 	@GeneratedValue
 	private Integer id;
 	
-	private Double valorTotal;
-	
 	private LocalDate data;
+	
+	private Double valorTotal;
 	
 	@OneToOne	
 	@JoinColumn(name = "pagamento_id_fk")
 	private Pagamento pagamento;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "cliente_id_fk")
 	private Cliente cliente;
 	
-	@OneToMany
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "pedido_produto", 
+	joinColumns = {@JoinColumn(name = "fk_pedido")}, 
+	inverseJoinColumns = {@JoinColumn(name = "fk_produto")} )
 	private List <Produto> produtos;
 	
 	public Integer getId() {
@@ -42,12 +48,6 @@ public class Pedido implements Serializable{
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Double getValorTotal() {
-		return valorTotal;
-	}
-	public void setValorTotal(Double valorTotal) {
-		this.valorTotal = valorTotal;
 	}
 	
 	public LocalDate getData() {
@@ -74,10 +74,16 @@ public class Pedido implements Serializable{
 	}
 	public List<Produto> getProdutos() {
 		if (produtos == null)
-			produtos = new ArrayList<>();
+			produtos = new ArrayList<Produto>();
 		return produtos;
 	}
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 }

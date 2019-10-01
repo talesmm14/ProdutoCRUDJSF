@@ -50,24 +50,28 @@
 			
 			<h:form>
 				<h3>Forma de pagamentos</h3>
-				<p:accordionPanel value="#{tipoPagamentoBean.tipoPagamentos}"
+				<p:accordionPanel value="#{tipoPagamentoBean.tipoPagamentos}" id="form"
 					var="pag">
 					<p:tab title="Forma - #{pag.descricao}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="ID:" style="font-weight: bold" />
 							<h:outputText value="#{pag.id}" />
+							<p:commandButton value="Deletar" action="#{tipoPagamentoBean.apagar(pag)}" update="form"/>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>
 			<h:form>
 				<h3>Pagamentos</h3>
-				<p:accordionPanel value="#{pagamentoBean.pagamentos}"
+				<p:accordionPanel value="#{pagamentoBean.pagamentos}" id="form1"
 					var="pag">
-					<p:tab title="Forma - #{pag.tipoPagamento.descricao}">
+					<p:tab title="Forma - #{pag.id}">
 						<h:panelGrid columns="2" cellpadding="5">
-							<h:outputText value="ID:" style="font-weight: bold" />
-							<h:outputText value="#{pag.id}" />
+							<h:outputText value="Data:" style="font-weight: bold" />
+							<h:outputText value="#{pag.data}" />
+							<h:outputText value="Forma de pagamento: " style="font-weight: bold" />
+							<h:outputText value="#{pag.tipoPagamento.descricao}" />
+							<p:commandButton value="Deletar" action="#{pagamentoBean.apagar(pag)}" update="form1"/>
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>

@@ -49,7 +49,6 @@
 	background-color: #d43f3a;
 	border-color: #d9534f;
 }
-
 </style>
 </h:head>
 <h:body>
@@ -58,39 +57,45 @@
 			maxSize="200">
 			<h:form>
 				<p:growl id="messages" showDetail="true" />
-				<p:commandButton value="Home" action="index?faces-redirect=true"/>
+				<p:commandButton value="Home" action="index?faces-redirect=true" />
 				<p:menuButton value="Cadastro">
-					<p:menuitem value="Pedidos" action="cadastroPedido?faces-redirect=true" update="messages"
+					<p:menuitem value="Pedidos"
+						action="cadastroPedido?faces-redirect=true" update="messages"
 						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cadastroCliente?faces-redirect=true" update="messages"
+					<p:menuitem value="Cliente"
+						action="cadastroCliente?faces-redirect=true" update="messages"
 						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="cadastroProduto?faces-redirect=true" ajax="false"
+					<p:menuitem value="Produtos"
+						action="cadastroProduto?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="cadastroPagamento?faces-redirect=true" ajax="false"
+					<p:menuitem value="Formas de pagamento"
+						action="cadastroPagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
-					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
-						icon="pi pi-home" />
+					<p:menuitem value="GitHub - talesmm14"
+						url="http://www.github.com/talesmm14" icon="pi pi-home" />
 				</p:menuButton>
-				<br/><br/>
+				<br />
+				<br />
 				<p:menuButton value="Consultas">
-					<p:menuitem value="Pedidos" action="pedido?faces-redirect=true" update="messages"
-						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cliente?faces-redirect=true" update="messages"
-						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="produto?faces-redirect=true" ajax="false"
-						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="pagamento?faces-redirect=true" ajax="false"
+					<p:menuitem value="Pedidos" action="pedido?faces-redirect=true"
+						update="messages" icon="pi pi-save" />
+					<p:menuitem value="Cliente" action="cliente?faces-redirect=true"
+						update="messages" icon="pi pi-refresh" />
+					<p:menuitem value="Produtos" action="produto?faces-redirect=true"
+						ajax="false" icon="pi pi-times" />
+					<p:menuitem value="Formas de pagamento"
+						action="pagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
-					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
-						icon="pi pi-home" />
+					<p:menuitem value="GitHub - talesmm14"
+						url="http://www.github.com/talesmm14" icon="pi pi-home" />
 				</p:menuButton>
 			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			
+
 			<h:form id="form3">
 				<p:panel id="cad_pedido" header="Cadastrar novo pedido"
 					toggleable="true" toggleSpeed="500" closeSpeed="500"
@@ -104,36 +109,50 @@
 							<f:selectItems value="#{clienteBean.clientes}" var="cli"
 								itemLabel="#{cli.nome}" itemValue="#{cli.id}" />
 						</p:selectOneMenu>
+						
+						<p:outputPanel>
+							<p:dataList value="#{produtoBean.produtos}" var="produ"
+								semptyMessage="Sem produtos cadastrados">
+								<p:column>
+								<f:facet name="header">
+										<h:outputText value="Produto" />
+									</f:facet>
+									<h:outputText value="#{produ.nome}" />
+								</p:column>
+								<p:column>&nbsp;&nbsp;&nbsp;&nbsp;</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Ação" />
+									</f:facet>
+									<p:commandButton value="+"
+										action="#{pedidoBean.cadastrarProdutos(produ)}" update="form3" />
+								</p:column>
+							</p:dataList>
+						</p:outputPanel>
+						<br />
 
-						<p:outputLabel for="advanced" value="Produtos: " />
-						<p:selectOneMenu id="advanced" value="#{pedidoBean.idProduto}" filter="true"
-							filterMatchMode="contains" showCheckbox="true">
-							<f:selectItems value="#{produtoBean.produtos}" var="produ"
-								itemLabel="#{produ.nome}"
-								itemValue="#{produ.id}" />
-							<p:column>
-								<h:outputText value="#{produ.nome}" />
-							</p:column>
-						</p:selectOneMenu>
+						<p:dataList value="#{pedidoBean.produtos}" var="produtos"
+							type="ordered" emptyMessage="Sem produtos">
+							<f:facet name="header">Lista de produtos</f:facet>
+        						#{produtos.nome} - R$ #{produtos.valor}
+    					</p:dataList>
+						<br />
+						<br />
 
 						<p:outputLabel for="mask" value="Data:" />
 						<p:calendar id="mask" value="#{pedidoBean.pedido.data}"
-							pattern="yyyy-MM-dd" mask="true" >
-							<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
-							</p:calendar>
+							pattern="yyyy-MM-dd" mask="true">
+							<f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+						</p:calendar>
 
 						<p:commandButton value="Cadastrar"
 							action="#{pedidoBean.inserir()}" update="form3" />
-						<p:commandButton value="Alterar" action="#{pedidoBean.alterar}"
-							update="form3" />
-						<p:commandButton value="Apagar" action="#{pedidoBean.apagar}"
-							update="form3" />
 						<p:commandButton value="Novo" action="#{pedidoBean.novo}"
 							update="form3" />
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
-			
+
 		</p:layoutUnit>
 	</p:layout>
 </h:body>

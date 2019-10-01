@@ -29,6 +29,7 @@ public class TipoPagamentoBean implements Serializable{
 	
 	public String inserir() {
 		tipoPagamentoEJB.insert(tipoPagamento);
+		novo();
 		return null;
 	}
 	
@@ -37,8 +38,8 @@ public class TipoPagamentoBean implements Serializable{
 		return null;
 	}
 	
-	public String apagar() {
-		tipoPagamentoEJB.delete(tipoPagamento);
+	public String apagar(TipoPagamento tipo) {
+		tipoPagamentoEJB.delete(tipo);
 		return null;
 	}
 	

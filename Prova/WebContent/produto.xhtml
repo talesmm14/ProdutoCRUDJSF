@@ -50,7 +50,7 @@
 			
 			<h:form>
 				<h3>Produtos</h3>
-				<p:accordionPanel value="#{produtoBean.produtos}" var="produto">
+				<p:accordionPanel value="#{produtoBean.produtos}" var="produto" id="form">
 					<p:tab title="Produto - #{produto.nome}">
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="ID:" style="font-weight: bold" />
@@ -58,6 +58,9 @@
 
 							<h:outputText value="Valor:" style="font-weight: bold" />
 							<h:outputText value="#{produto.valor}" />
+							
+							<p:commandButton value="Deletar" action="#{produtoBean.apagar(produto)}" update="form"/>
+							<p:commandButton value="Alterar" action="#{produtoBean.alterar(produto)}" />
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>

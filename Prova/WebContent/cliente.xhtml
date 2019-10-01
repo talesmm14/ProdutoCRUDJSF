@@ -15,54 +15,61 @@
 			maxSize="200">
 			<h:form>
 				<p:growl id="messages" showDetail="true" />
-				<p:commandButton value="Home" action="index?faces-redirect=true"/>
+				<p:commandButton value="Home" action="index?faces-redirect=true" />
 				<p:menuButton value="Cadastro">
-					<p:menuitem value="Pedidos" action="cadastroPedido?faces-redirect=true" update="messages"
+					<p:menuitem value="Pedidos"
+						action="cadastroPedido?faces-redirect=true" update="messages"
 						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cadastroCliente?faces-redirect=true" update="messages"
+					<p:menuitem value="Cliente"
+						action="cadastroCliente?faces-redirect=true" update="messages"
 						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="cadastroProduto?faces-redirect=true" ajax="false"
+					<p:menuitem value="Produtos"
+						action="cadastroProduto?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="cadastroPagamento?faces-redirect=true" ajax="false"
+					<p:menuitem value="Formas de pagamento"
+						action="cadastroPagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
-					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
-						icon="pi pi-home" />
+					<p:menuitem value="GitHub - talesmm14"
+						url="http://www.github.com/talesmm14" icon="pi pi-home" />
 				</p:menuButton>
-				<br/><br/>
+				<br />
+				<br />
 				<p:menuButton value="Consultas">
-					<p:menuitem value="Pedidos" action="pedido?faces-redirect=true" update="messages"
-						icon="pi pi-save" />
-					<p:menuitem value="Cliente" action="cliente?faces-redirect=true" update="messages"
-						icon="pi pi-refresh" />
-					<p:menuitem value="Produtos" action="produto?faces-redirect=true" ajax="false"
-						icon="pi pi-times" />
-					<p:menuitem value="Formas de pagamento" action="pagamento?faces-redirect=true" ajax="false"
+					<p:menuitem value="Pedidos" action="pedido?faces-redirect=true"
+						update="messages" icon="pi pi-save" />
+					<p:menuitem value="Cliente" action="cliente?faces-redirect=true"
+						update="messages" icon="pi pi-refresh" />
+					<p:menuitem value="Produtos" action="produto?faces-redirect=true"
+						ajax="false" icon="pi pi-times" />
+					<p:menuitem value="Formas de pagamento"
+						action="pagamento?faces-redirect=true" ajax="false"
 						icon="pi pi-times" />
 					<p:separator />
-					<p:menuitem value="GitHub - talesmm14" url="http://www.github.com/talesmm14"
-						icon="pi pi-home" />
+					<p:menuitem value="GitHub - talesmm14"
+						url="http://www.github.com/talesmm14" icon="pi pi-home" />
 				</p:menuButton>
 			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
 			
-			<h:form>
+			<h:form >
 				<h3>Clientes</h3>
-				<p:accordionPanel value="#{clienteBean.clientes}" var="cliente">
-					<p:tab title="Cliente - #{cliente.nome}">
+				<p:accordionPanel value="#{clienteBean.clientes}" var="cliente" id="form">
+					<p:tab title="Cliente - #{cliente.nome}" >
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="ID:" style="font-weight: bold" />
 							<h:outputText value="#{cliente.id}" />
-
 							<h:outputText value="Valor:" style="font-weight: bold" />
 							<h:outputText value="#{cliente.email}" />
+							<p:commandButton value="Deletar" action="#{clienteBean.apagar(cliente)}" update="form"/>
+							<p:commandButton value="Alterar" action="#{clienteBean.alterar(cliente)}" />
 						</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>
-			
+
 		</p:layoutUnit>
 	</p:layout>
 </h:body>
